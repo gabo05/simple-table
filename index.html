@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/table.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Simple Table Demo</h1>
+            <div class="col-lg-12">
+                <div class="col-lg-6">
+                    <h2>Basic</h2>
+                    <table id="test" class="table table-hover">
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Change pagination options</h2>
+                    <table id="test2" class="table table-hover">
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="col-lg-6">
+                    <h2>No records</h2>
+                    <table id="test3" class="table table-hover">
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Other color</h2>
+                    <table id="test4" class="table table-hover">
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="col-lg-6">
+                    <h2>No pagination</h2>
+                    <table id="test5" class="table table-hover">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.table.min.js"></script>
+        <script>
+            
+            var columns = ["Fecha","Nombre", "Pais"];
+            var data = [
+                ["30/05", "Dia de la Madre", "Nicaragua"],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
+                ["06/01", "Reyes Magos", "Todo el mundo"],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
+                ["24/11", "Dia de ?????", "Nicaragua"],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
+                ["07/12", "Griteria", "Nicaragua"],
+                ["30/05", "Dia de la Madre", "Nicaragua"],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
+                ["06/01", "Reyes Magos", "Todo el mundo"],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
+                ["24/11", "Dia de ?????", "Nicaragua"],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
+                ["07/12", "Griteria", "Nicaragua"],
+                ["30/05", "Dia de la Madre", "Nicaragua"],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
+                ["06/01", "Reyes Magos", "Todo el mundo"],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
+                ["24/11", "Dia de ?????", "Nicaragua"],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
+                ["07/12", "Griteria", "Nicaragua"],
+                ["30/05", "Dia de la Madre", "Nicaragua"],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
+                ["06/01", "Reyes Magos", "Todo el mundo"],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
+                ["24/11", "Dia de ?????", "Nicaragua"],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
+                ["07/12", "Griteria", "Nicaragua"],
+                ["30/05", "Dia de la Madre", "Nicaragua"],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
+                ["06/01", "Reyes Magos", "Todo el mundo"],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
+                ["24/11", "Dia de ?????", "Nicaragua"],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
+                ["07/12", "Griteria", "Nicaragua"],
+                ["30/05", "Dia de la Madre", "Nicaragua"],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
+                ["06/01", "Reyes Magos", "Todo el mundo"],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
+                ["24/11", "Dia de ?????", "Nicaragua"],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
+                ["07/12", "Griteria", "Nicaragua"],
+                ["30/05", "Dia de la Madre", "Nicaragua"],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
+                ["06/01", "Reyes Magos", "Todo el mundo"],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
+                ["24/11", "Dia de ?????", "Nicaragua"],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
+                ["07/12", "Griteria", "Nicaragua"],
+                ["30/05", "Dia de la Madre", "Nicaragua"],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
+                ["06/01", "Reyes Magos", "Todo el mundo"],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
+                ["24/11", "Dia de ?????", "Nicaragua"],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
+                ["07/12", "Griteria", "Nicaragua"]
+            ];
+            //var init1 = new Date();
+            $('#test').SimpleTable({data: data, columns: columns});
+//            var end1 = new Date();
+//            console.log(end1.valueOf() - init1.valueOf());
+            $('#test2').SimpleTable({data: data, columns: columns, size: 7});
+            $('#test3').SimpleTable({data: [], columns: columns, size: 5});
+            $('#test4').SimpleTable({data: data, columns: columns, headClass: 'success'});
+            $('#test5').SimpleTable({data: data, columns: columns, pagination: false});
+        </script>
+    </body>
+</html>
