@@ -38,12 +38,17 @@
                     <table id="test5" class="table table-hover">
                     </table>
                 </div>
+                <div class="col-lg-6">
+                    <h2>In to DIV element</h2>
+                    <div id="test6">
+                    </div>
+                </div>
             </div>
         </div>
         <script src="js/jquery.js"></script>
-        <script src="js/jquery.table.min.js"></script>
+<!--        <script src="js/jquery.table.min.js"></script>-->
+        <script src="js/jquery.table.js"></script>
         <script>
-            
             var columns = ["Fecha","Nombre", "Pais"];
             var data = [
                 ["30/05", "Dia de la Madre", "Nicaragua"],
@@ -113,12 +118,13 @@
             ];
             //var init1 = new Date();
             $('#test').SimpleTable({data: data, columns: columns});
-//            var end1 = new Date();
-//            console.log(end1.valueOf() - init1.valueOf());
+            //var end1 = new Date();
+            //console.log(end1.valueOf() - init1.valueOf());
             $('#test2').SimpleTable({data: data, columns: columns, size: 7});
             $('#test3').SimpleTable({data: [], columns: columns, size: 5});
             $('#test4').SimpleTable({data: data, columns: columns, headClass: 'success'});
             $('#test5').SimpleTable({data: data, columns: columns, pagination: false});
+            $('#test6').SimpleTable({data: data, columns: columns});
         </script>
     </body>
 </html>
