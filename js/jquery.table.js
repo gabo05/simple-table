@@ -1,4 +1,6 @@
-/*CSS CONSTANTS*/
+//======================================
+//CSS CONSTANTS
+//======================================
 CSS_HALF = 'col-lg-6';
 CSS_BTN_DEFAULT = 'btn btn-default'
 CSS_GROUP = 'input-group';
@@ -6,11 +8,14 @@ CSS_BTN_GROUP = 'input-group-btn';
 CSS_TABLE = 'table table-hover';
 CSS_HEAD_ROW = 'info';
 CSS_PAGINATION = 'pagination';
-/*END CSS CONSTANTS*/
-/*HTML CONSTANTS*/
+
+//======================================
+//END CSS CONSTANTS
+//======================================
 HTML_TABLE = 'table';
 HTML_TABLE_HEAD = 'thead';
 HTML_TABLE_BODY = 'tbody';
+HTML_TABLE_FOOT = 'tfoot';
 HTML_TABLE_ROW = 'tr';
 HTML_TABLE_CELL = 'td';
 HTML_LIST = 'ul';
@@ -18,7 +23,9 @@ HTML_LIST_ITEM = 'li';
 HTML_DIV = 'div';
 HTML_SPAN = 'span';
 HTML_LINK = 'a';
-/*END HTML CONSTATNS*/
+//======================================
+//END HTML CONSTATNS
+//======================================
 function newNode (tag, content, attributes, data){
     var element = document.createElement(tag);
     
@@ -27,8 +34,7 @@ function newNode (tag, content, attributes, data){
             element.appendChild(content);
         else
             if(typeof content === 'string' || typeof content === 'number'){
-                var nodeText = document.createTextNode(content);
-                element.appendChild(nodeText);
+                element.innerHTML = content;
             }
     }
     if(attributes !== undefined && attributes != null){
@@ -51,6 +57,9 @@ Element.prototype.removeByTag = function (tagName) {
         this.removeChild(children[i]);
     }
 };
+//======================================
+//Array extension functions
+//======================================
 Array.prototype.filterAndSplit = function (condition) {
     
     if(typeof condition === 'function'){
@@ -73,24 +82,28 @@ Array.prototype.filterAndSplit = function (condition) {
 };
 Array.prototype.max = function(field){
     var pmax = parseFloat(this[0][field]) || '';
-    var index = -1;
+    var index = pmax === '' ? -1 : 0;
     for(var i = 0; i < this.length; i++){
         aux = parseFloat(this[i][field]) || '';
-        if(pmax === '' || aux > pmax)
+        if(pmax === '' || aux > pmax){
             pmax = aux || '';
+            index = i;
+        }
     }
     return {value: pmax, index: index};
-}
+};
 Array.prototype.min = function(field){
     var pmin = parseFloat(this[0][field]) || '';
-    var index = -1;
+    var index = pmin === '' ? -1 : 0;
     for(var i = 0; i < this.length; i++){
         aux = parseFloat(this[i][field]) || '';
-        if(pmin === '' || aux < pmin)
+        if(pmin === '' || aux < pmin){
             pmin = aux || '';
+            index = i;
+        }
     }
     return {value: pmin, index: index};
-}
+};
 Array.prototype.moda = function(field){
     var values = [];
     var filtered = this;
@@ -103,18 +116,25 @@ Array.prototype.moda = function(field){
         values.push({ value: value, matches: both[0].length });
         filtered = both[1];
     }
-    return this[values.max("matches").index][field];
-}
+    return { value: this[values.max("matches").index][field], index: 0 };
+};
 Array.prototype.average = function(field){
-    return this.sum(field) / this.length;
-}
+    return {value: this.sum(field).value / this.length};
+};
 Array.prototype.sum = function(field){
     var psum = parseFloat(this[0][field]) || 0;
     for(var i = 1; i < this.length; i++){
         psum += parseFloat(this[i][field]) || 0;
     }
-    return psum;
-}
+    return {value: psum};
+};
+//======================================
+//End array extension functions
+//======================================
+
+//======================================
+//Puggin function
+//======================================
 (function($){
     $.fn.SimpleTable = function(options){
         var base_settings = $.extend({
@@ -125,11 +145,13 @@ Array.prototype.sum = function(field){
             header: true,
             pagination: true,
             rePag: true,
+            reCalc: true,
             enum: true,
             headClass : CSS_HEAD_ROW,
             noRowsMessage: "No records to display",
+            footer: [],
             searchForm: false,
-            searchOn: "submit" //submit, write
+            searchOn: "submit", //submit, write
         }, options);
 
         return this.each(function(){
@@ -152,6 +174,13 @@ Array.prototype.sum = function(field){
         });
     }
 }(jQuery))
+//======================================
+//End pluggin function
+//======================================
+
+//======================================
+//Table Builder Director
+//======================================
 var Table = function (builder) {
     this.builder = builder;
     var self = this;
@@ -159,10 +188,18 @@ var Table = function (builder) {
         builder.clear();
         builder.buildHead();
         builder.buildBody();
+        builder.buildFooter();
         builder.buildPagination();
         return self.builder.get();
     }
-}
+};
+//======================================
+//End Table Builder Director
+//======================================
+
+//======================================
+//Table Builder
+//======================================
 var TableBuilder = function (table, settings) {
     this.table = table;
     this.settings = settings;
@@ -172,6 +209,8 @@ var TableBuilder = function (table, settings) {
         self.table.removeByTag(HTML_TABLE_BODY);
         if(settings.header)
             self.table.removeByTag(HTML_TABLE_HEAD);
+        if(settings.reCalc)
+            self.table.removeByTag(HTML_TABLE_FOOT);
     }
     //Create table header if not exists
     this.buildHead = function () {
@@ -198,7 +237,8 @@ var TableBuilder = function (table, settings) {
             if (self.settings.pagination) {
                 start = (self.settings.page - 1)*self.settings.size;
                 end = start+self.settings.size;
-                self.settings.noPages = (self.settings.data.length / self.settings.size).toFixed(0);
+                var p = (self.settings.data.length / self.settings.size);
+                self.settings.noPages =  p > parseInt(p.toFixed(0)) ? parseInt(p.toFixed(0)) + 1 : parseInt(p.toFixed(0));
                 pageData = self.settings.data.slice(start, end);
             }
             else
@@ -228,17 +268,36 @@ var TableBuilder = function (table, settings) {
             for (var j = 0; j < paginationSettings.pageData.length; j++) {
                 
                 var row = paginationSettings.pageData[j];
-                var tbRow = document.createElement(HTML_TABLE_ROW);
                 
-                //If enum rows is required
-                if (self.settings.enum) tbRow.appendChild(newNode(HTML_TABLE_CELL, paginationSettings.start+j+1));
-                //Add row data
-                for (var k = 0; k < row.length; k++) tbRow.appendChild(newNode(HTML_TABLE_CELL, row[k]));
+                var tbRow;
+                if(row instanceof Array)
+                    tbRow = self.buildFromArray(row, paginationSettings.start+j+1);
+                else
+                    tbRow = self.buildFromObject(row, paginationSettings.start+j+1);
                 
                 body.appendChild(tbRow);
             }
         }
         self.table.appendChild(body);
+    }
+    this.buildFromArray = function(row, noRow){
+        var tbRow = document.createElement(HTML_TABLE_ROW);
+        //If enum rows is required
+        if (self.settings.enum && noRow) tbRow.appendChild(newNode(HTML_TABLE_CELL, noRow));
+        //Add row data
+        for (var k = 0; k < row.length; k++) if(row[k]) tbRow.appendChild(newNode(HTML_TABLE_CELL, row[k]));
+        //
+        return tbRow;
+    }
+    this.buildFromObject = function(row, noRow){
+        var tbRow = document.createElement(HTML_TABLE_ROW);
+        //If enum rows is required
+        if (self.settings.enum && noRow) tbRow.appendChild(newNode(HTML_TABLE_CELL, noRow));
+        //Add row data
+        for (var k = 0; k < self.settings.columns.length; k++) 
+            tbRow.appendChild(newNode(HTML_TABLE_CELL, row[self.settings.columns[k]] || ''));
+        //
+        return tbRow;
     }
     this.buildPagination = function () {
         var pageData = self.getPaginationSettings().pageData;
@@ -266,7 +325,24 @@ var TableBuilder = function (table, settings) {
         }
     }
     this.buildFooter = function(){
-        
+        if(self.settings.reCalc && self.settings.footer.length > 0 ){
+            var isArray = self.settings.data[0] instanceof Array;
+            var values = [];
+            for(var i = 0; i < self.settings.footer.length; i++){
+                var fs = self.settings.footer[i];
+                var field = isArray ? self.settings.columns.indexOf(fs.field) : fs.field;
+                var v = '';
+                if(typeof fs.summary === 'string') v = data[fs.summary](field).value;
+                
+                else if(typeof fs.summary === 'function') v = fs.summary(data, field);
+                
+                if(typeof fs.condition === 'function' ) v = data.filterAndSplit(fs.condition)[0][0][field];
+                
+                values[fs.field] = fs.text ? fs.text.replace('{$}', v) : v;
+            }
+            self.settings.reCalc = false;
+            self.table.appendChild(newNode(HTML_TABLE_FOOT, self.buildFromObject(values, ' ')));
+        }
     }
     this.createPageItem = function(content, page){
         var link = newNode(HTML_LINK, content, null, [{name: "page", value: page}]);
@@ -283,4 +359,7 @@ var TableBuilder = function (table, settings) {
     this.get = function(){
         return self.table;
     }
-}
+};
+//======================================
+//End Table Builder
+//======================================

@@ -22,9 +22,9 @@
             </div>
             <div class="col-lg-12">
                 <div class="col-lg-6">
-                    <h2>No records</h2>
-                    <table id="test3" class="table table-hover">
-                    </table>
+                    <h2>In to DIV element</h2>
+                    <div id="test6">
+                    </div>
                 </div>
                 <div class="col-lg-6">
                     <h2>Other color</h2>
@@ -34,14 +34,26 @@
             </div>
             <div class="col-lg-12">
                 <div class="col-lg-6">
-                    <h2>No pagination</h2>
-                    <table id="test5" class="table table-hover">
+                    <h2>With Footer</h2>
+                    <table id="test7" class="table table-hover">
                     </table>
                 </div>
                 <div class="col-lg-6">
-                    <h2>In to DIV element</h2>
-                    <div id="test6">
+                    <h2>With Search Form</h2>
+                    <div id="test8">
                     </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="col-lg-6">
+                    <h2>No records</h2>
+                    <table id="test3" class="table table-hover">
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <h2>No pagination</h2>
+                    <table id="test5" class="table table-hover">
+                    </table>
                 </div>
             </div>
         </div>
@@ -49,73 +61,74 @@
 <!--        <script src="js/jquery.table.min.js"></script>-->
         <script src="js/jquery.table.js"></script>
         <script>
-            var columns = ["Fecha","Nombre", "Pais"];
+            var columns = ["Fecha","Nombre", "Pais", "A", "B", "C", "D"];
             var data = [
-                ["30/05", "Dia de la Madre", "Nicaragua"],
-                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
-                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
-                ["06/01", "Reyes Magos", "Todo el mundo"],
-                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
-                ["24/11", "Dia de ?????", "Nicaragua"],
-                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
-                ["07/12", "Griteria", "Nicaragua"],
-                ["30/05", "Dia de la Madre", "Nicaragua"],
-                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
-                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
-                ["06/01", "Reyes Magos", "Todo el mundo"],
-                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
-                ["24/11", "Dia de ?????", "Nicaragua"],
-                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
-                ["07/12", "Griteria", "Nicaragua"],
-                ["30/05", "Dia de la Madre", "Nicaragua"],
-                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
-                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
-                ["06/01", "Reyes Magos", "Todo el mundo"],
-                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
-                ["24/11", "Dia de ?????", "Nicaragua"],
-                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
-                ["07/12", "Griteria", "Nicaragua"],
-                ["30/05", "Dia de la Madre", "Nicaragua"],
-                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
-                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
-                ["06/01", "Reyes Magos", "Todo el mundo"],
-                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
-                ["24/11", "Dia de ?????", "Nicaragua"],
-                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
-                ["07/12", "Griteria", "Nicaragua"],
-                ["30/05", "Dia de la Madre", "Nicaragua"],
-                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
-                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
-                ["06/01", "Reyes Magos", "Todo el mundo"],
-                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
-                ["24/11", "Dia de ?????", "Nicaragua"],
-                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
-                ["07/12", "Griteria", "Nicaragua"],
-                ["30/05", "Dia de la Madre", "Nicaragua"],
-                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
-                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
-                ["06/01", "Reyes Magos", "Todo el mundo"],
-                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
-                ["24/11", "Dia de ?????", "Nicaragua"],
-                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
-                ["07/12", "Griteria", "Nicaragua"],
-                ["30/05", "Dia de la Madre", "Nicaragua"],
-                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
-                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
-                ["06/01", "Reyes Magos", "Todo el mundo"],
-                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
-                ["24/11", "Dia de ?????", "Nicaragua"],
-                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
-                ["07/12", "Griteria", "Nicaragua"],
-                ["30/05", "Dia de la Madre", "Nicaragua"],
-                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua"],
-                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo"],
-                ["06/01", "Reyes Magos", "Todo el mundo"],
-                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua"],
-                ["24/11", "Dia de ?????", "Nicaragua"],
-                ["01/08", "Santo Domingo de Guzman", "Nicaragua"],
-                ["07/12", "Griteria", "Nicaragua"]
+                ["30/05", "Dia de la Madre", "Nicaragua", 29, 87, 38, 47],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua", 27, 94, 34, 45],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo", 24, 89, 37, 44],
+                ["06/01", "Reyes Magos", "Todo el mundo", 31, 92, 39, 51],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua", 28, 86, 40, 46],
+                ["24/11", "Dia de ?????", "Nicaragua", 27, 87, 37, 48],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua", 25, 88, 38, 47],
+                ["07/12", "Griteria", "Nicaragua", 29, 89, 42, 44],
+                ["30/05", "Dia de la Madre", "Nicaragua", 29, 87, 38, 47],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua", 27, 94, 34, 45],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo", 24, 89, 37, 44],
+                ["06/01", "Reyes Magos", "Todo el mundo", 31, 92, 39, 51],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua", 28, 86, 40, 46],
+                ["24/11", "Dia de ?????", "Nicaragua", 27, 87, 37, 48],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua", 25, 88, 38, 47],
+                ["07/12", "Griteria", "Nicaragua", 29, 89, 42, 44],
+                ["30/05", "Dia de la Madre", "Nicaragua", 29, 87, 38, 47],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua", 27, 94, 34, 45],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo", 24, 89, 37, 44],
+                ["06/01", "Reyes Magos", "Todo el mundo", 31, 92, 39, 51],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua", 28, 86, 40, 46],
+                ["24/11", "Dia de ?????", "Nicaragua", 27, 87, 37, 48],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua", 25, 88, 38, 47],
+                ["07/12", "Griteria", "Nicaragua", 29, 89, 42, 44],
+                ["30/05", "Dia de la Madre", "Nicaragua", 29, 87, 38, 47],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua", 27, 94, 34, 45],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo", 24, 89, 37, 44],
+                ["06/01", "Reyes Magos", "Todo el mundo", 31, 92, 39, 51],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua", 28, 86, 40, 46],
+                ["24/11", "Dia de ?????", "Nicaragua", 27, 87, 37, 48],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua", 25, 88, 38, 47],
+                ["07/12", "Griteria", "Nicaragua", 29, 89, 42, 44],
+                ["30/05", "Dia de la Madre", "Nicaragua", 29, 87, 38, 47],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua", 27, 94, 34, 45],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo", 24, 89, 37, 44],
+                ["06/01", "Reyes Magos", "Todo el mundo", 31, 92, 39, 51],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua", 28, 86, 40, 46],
+                ["24/11", "Dia de ?????", "Nicaragua", 27, 87, 37, 48],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua", 25, 88, 38, 47],
+                ["07/12", "Griteria", "Nicaragua", 29, 89, 42, 44],
+                ["30/05", "Dia de la Madre", "Nicaragua", 29, 87, 38, 47],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua", 27, 94, 34, 45],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo", 24, 89, 37, 44],
+                ["06/01", "Reyes Magos", "Todo el mundo", 31, 92, 39, 51],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua", 28, 86, 40, 46],
+                ["24/11", "Dia de ?????", "Nicaragua", 27, 87, 37, 48],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua", 25, 88, 38, 47],
+                ["07/12", "Griteria", "Nicaragua", 29, 89, 42, 44],
+                ["30/05", "Dia de la Madre", "Nicaragua", 29, 87, 38, 47],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua", 27, 94, 34, 45],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo", 24, 89, 37, 44],
+                ["06/01", "Reyes Magos", "Todo el mundo", 31, 92, 39, 51],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua", 28, 86, 40, 46],
+                ["24/11", "Dia de ?????", "Nicaragua", 27, 87, 37, 48],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua", 25, 88, 38, 47],
+                ["07/12", "Griteria", "Nicaragua", 29, 89, 42, 44],
+                ["30/05", "Dia de la Madre", "Nicaragua", 29, 87, 38, 47],
+                ["08/12", "Dia de la Virgen de Concepción", "Nicaragua", 27, 94, 34, 45],
+                ["12/12", "Dia de la Virgen de Guadalupe", "Todo el mundo", 24, 89, 37, 44],
+                ["06/01", "Reyes Magos", "Todo el mundo", 31, 92, 39, 51],
+                ["24/05", "Dia de la Virgen Auxiliadora", "Nicaragua", 28, 86, 40, 46],
+                ["24/11", "Dia de ?????", "Nicaragua", 27, 87, 37, 48],
+                ["01/08", "Santo Domingo de Guzman", "Nicaragua", 25, 88, 38, 47],
+                ["07/12", "Griteria", "Nicaragua", 29, 89, 42, 44]
             ];
+            var data2 = [{Fecha:"15/09",Nombre:"Dia de la Independencia", Pais:"Nicaragua"}];
             //var init1 = new Date();
             $('#test').SimpleTable({data: data, columns: columns});
             //var end1 = new Date();
@@ -125,6 +138,17 @@
             $('#test4').SimpleTable({data: data, columns: columns, headClass: 'success'});
             $('#test5').SimpleTable({data: data, columns: columns, pagination: false});
             $('#test6').SimpleTable({data: data, columns: columns});
+            $('#test7').SimpleTable({
+                data: data, 
+                columns: columns,
+                footer: [
+                    {field: "Pais", summary:"moda", text: "<strong>Moda:</strong> {$}"},
+                    {field:"A", summary:"sum", text: "<strong>Total:</strong> {$}"},
+                    {field:"B", summary:"average", text: "<strong>Promedio:</strong> {$}"},
+                    {field:"C", summary:"max", text: "<strong>Maximo:</strong> {$}"},
+                    {field:"D", summary:"min", text: "<strong>Minimo:</strong> {$}"}
+                ]
+            });
         </script>
     </body>
 </html>
