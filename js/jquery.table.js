@@ -12,6 +12,9 @@ CSS_PAGINATION = 'pagination';
 //======================================
 //END CSS CONSTANTS
 //======================================
+//======================================
+//HTML CONSTANTS
+//======================================
 HTML_TABLE = 'table';
 HTML_TABLE_HEAD = 'thead';
 HTML_TABLE_BODY = 'tbody';
@@ -25,6 +28,9 @@ HTML_SPAN = 'span';
 HTML_LINK = 'a';
 //======================================
 //END HTML CONSTATNS
+//======================================
+//======================================
+//HTML Functions
 //======================================
 function newNode (tag, content, attributes, data){
     var element = document.createElement(tag);
@@ -58,7 +64,15 @@ Element.prototype.removeByTag = function (tagName) {
     }
 };
 //======================================
+//End HTML Functions
+//======================================
+//======================================
 //Array extension functions
+//======================================
+//======================================
+// Split the array in two arrays
+// 0: matches 
+// 1: no matches elements
 //======================================
 Array.prototype.filterAndSplit = function (condition) {
     
@@ -80,6 +94,52 @@ Array.prototype.filterAndSplit = function (condition) {
     }
     throw "Condition must be a function";
 };
+//======================================
+//Sort the array by field
+//======================================
+Array.prototype.orderby = function(field){
+    var newArray = this.slice(0);
+    quicksort(newArray, field);
+    return newArray;
+}
+var quicksort = function(arr, field, left, right){
+    left = left || 0;
+    right = right || arr.length - 1;
+    var i = left, j = right;
+    var tmp;
+    var pivotInd = parseInt(((left + right) / 2).toFixed());
+    var pivot = arr[pivotInd][field];
+    
+    /* partition */
+      while (i <= j) {
+            while (pivot.greaterThan(arr[i][field]))
+                  i++;
+            while (arr[j][field].greaterThan(pivot))
+                  j--;
+            if (i <= j) {
+                  tmp = arr[i];
+                  arr[i] = arr[j];
+                  arr[j] = tmp;
+                  i++;
+                  j--;
+            }
+      }
+ 
+      /* recursion */
+      if (left < j)
+            quicksort(arr, field, left, j);
+      if (i < right)
+            quicksort(arr, field, i, right);
+}
+String.prototype.greaterThan = function(other){
+    return [this, other].sort()[0] === other; 
+}
+Number.prototype.greaterThan = function(other){
+    return [this, other].sort()[0] === other;
+}
+//======================================
+//Calculate the max of the elements of the array
+//======================================
 Array.prototype.max = function(field){
     var pmax = parseFloat(this[0][field]) || '';
     var index = pmax === '' ? -1 : 0;
@@ -92,6 +152,9 @@ Array.prototype.max = function(field){
     }
     return {value: pmax, index: index};
 };
+//======================================
+//Calculate the min of the elements of the array
+//======================================
 Array.prototype.min = function(field){
     var pmin = parseFloat(this[0][field]) || '';
     var index = pmin === '' ? -1 : 0;
@@ -104,6 +167,9 @@ Array.prototype.min = function(field){
     }
     return {value: pmin, index: index};
 };
+//======================================
+//Calculate the moda
+//======================================
 Array.prototype.moda = function(field){
     var values = [];
     var filtered = this;
@@ -118,9 +184,25 @@ Array.prototype.moda = function(field){
     }
     return { value: this[values.max("matches").index][field], index: 0 };
 };
+//======================================
+//Calculate the max of the elements of the array
+//======================================
+Array.prototype.median = function(field){
+    var order = this.orderby(field);
+    var n = this.length;
+    value = n % 2 == 0 ? (this[n/2][field] + this[(n/2)-1][field]) / 2 : this[parseInt((n/2).toFixed(0))][field];
+    
+    return {value : value};
+}
+//======================================
+//Calculate the average
+//======================================
 Array.prototype.average = function(field){
     return {value: this.sum(field).value / this.length};
 };
+//======================================
+//Calculate the sum
+//======================================
 Array.prototype.sum = function(field){
     var psum = parseFloat(this[0][field]) || 0;
     for(var i = 1; i < this.length; i++){
